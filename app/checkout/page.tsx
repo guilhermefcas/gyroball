@@ -212,7 +212,7 @@ export default function CheckoutPage() {
               <ArrowLeft className="w-5 h-5" />
               <span className="font-semibold">Voltar</span>
             </button>
-            <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            <h1 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
               Gyroball Pro
             </h1>
             <div className="flex items-center gap-2 text-green-600">
@@ -225,7 +225,7 @@ export default function CheckoutPage() {
 
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
             {/* Left Column - Forms */}
             <div className="lg:col-span-2 space-y-6">
               {/* Product Summary */}
@@ -234,14 +234,14 @@ export default function CheckoutPage() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <Card>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Seu Pedido</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">Seu Pedido</h2>
                   <div className="flex items-center gap-4">
                     <GyroballShake
                       src="/images/D_NQ_NP_2X_931154-MLB88657957287_072025-F.webp"
                       alt="Gyroball Pro"
-                      width={100}
-                      height={100}
-                      className="rounded-lg"
+                      width={80}
+                      height={80}
+                      className="rounded-lg w-16 h-16 md:w-20 md:h-20"
                       autoStart={true}
                       duration={3000}
                     />
@@ -449,13 +449,13 @@ export default function CheckoutPage() {
                 transition={{ delay: 0.3 }}
               >
                 <Card>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Forma de Pagamento</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">Forma de Pagamento</h2>
                   
                   <div className="grid md:grid-cols-2 gap-4 mb-6">
                     <button
                       type="button"
                       onClick={() => setPaymentMethod('pix')}
-                      className={`p-6 rounded-xl border-2 transition-all ${
+                      className={`p-4 md:p-6 rounded-xl border-2 transition-all ${
                         paymentMethod === 'pix'
                           ? 'border-blue-600 bg-blue-50 shadow-lg'
                           : 'border-gray-200 hover:border-blue-300'
@@ -468,7 +468,7 @@ export default function CheckoutPage() {
                     <button
                       type="button"
                       onClick={() => setPaymentMethod('credit_card')}
-                      className={`p-6 rounded-xl border-2 transition-all ${
+                      className={`p-4 md:p-6 rounded-xl border-2 transition-all ${
                         paymentMethod === 'credit_card'
                           ? 'border-blue-600 bg-blue-50 shadow-lg'
                           : 'border-gray-200 hover:border-blue-300'

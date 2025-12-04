@@ -219,7 +219,7 @@ export default function Checkout({ onClose }: CheckoutProps) {
         {/* Customer Info */}
         <Card>
           <h3 className="text-xl font-bold text-gray-900 mb-4">Dados Pessoais</h3>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-3 md:gap-4">
             <div className="md:col-span-2">
               <Input
                 label="Nome Completo"
@@ -381,26 +381,26 @@ export default function Checkout({ onClose }: CheckoutProps) {
             <button
               type="button"
               onClick={() => setPaymentMethod('pix')}
-              className={`p-6 rounded-xl border-2 transition-all ${
+              className={`p-4 md:p-6 rounded-xl border-2 transition-all ${
                 paymentMethod === 'pix'
                   ? 'border-blue-600 bg-blue-50'
                   : 'border-gray-200 hover:border-blue-300'
               }`}
             >
-              <QrCode className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+              <QrCode className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-blue-600" />
               <div className="font-bold text-gray-900">PIX</div>
               <div className="text-sm text-gray-600">Aprovação imediata</div>
             </button>
             <button
               type="button"
               onClick={() => setPaymentMethod('credit_card')}
-              className={`p-6 rounded-xl border-2 transition-all ${
+              className={`p-4 md:p-6 rounded-xl border-2 transition-all ${
                 paymentMethod === 'credit_card'
                   ? 'border-blue-600 bg-blue-50'
                   : 'border-gray-200 hover:border-blue-300'
               }`}
             >
-              <CreditCard className="w-8 h-8 mx-auto mb-2 text-blue-600" />
+              <CreditCard className="w-6 h-6 md:w-8 md:h-8 mx-auto mb-2 text-blue-600" />
               <div className="font-bold text-gray-900">Cartão de Crédito</div>
               <div className="text-sm text-gray-600">Parcelamento disponível</div>
             </button>

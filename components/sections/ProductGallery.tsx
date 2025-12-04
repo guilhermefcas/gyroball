@@ -33,7 +33,7 @@ export default function ProductGallery() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Veja o <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Gyroball em Ação</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -64,7 +64,7 @@ export default function ProductGallery() {
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -50, rotateY: -15 }}
               animate={isInView ? { opacity: 1, x: 0, rotateY: 0 } : {}}

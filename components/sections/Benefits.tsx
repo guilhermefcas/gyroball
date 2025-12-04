@@ -28,7 +28,7 @@ export default function Benefits() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Por que escolher o <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Gyroball Pro?</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
@@ -36,7 +36,7 @@ export default function Benefits() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {BENEFITS.map((benefit, index) => (
             <motion.div
               key={index}
@@ -48,7 +48,7 @@ export default function Benefits() {
                 <div className="flex flex-col items-center text-center space-y-4">
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center text-5xl group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300"
+                    className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center text-5xl group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300"
                   >
                     {benefit.icon}
                   </motion.div>

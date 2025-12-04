@@ -48,7 +48,7 @@ export default function InteractiveGyro() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-4">
             Sinta a <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-500">Energia</span>
           </h2>
           <p className="text-xl text-gray-400">
@@ -134,7 +134,7 @@ export default function InteractiveGyro() {
                 ease: 'easeInOut'
               }
             }}
-            className="relative w-64 h-64 md:w-96 md:h-96"
+            className="relative w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96"
           >
             <motion.div
               className="relative w-full h-full"

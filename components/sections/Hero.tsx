@@ -77,14 +77,14 @@ export default function Hero({ onBuyClick }: HeroProps) {
               className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-lg px-4 py-2 rounded-full border border-white/30"
             >
               <TrendingUp className="w-4 h-4" />
-              <span className="text-sm font-semibold">+5.000 vendidos este mês</span>
+              <span className="text-xs md:text-sm font-semibold">+5.000 vendidos este mês</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-5xl md:text-6xl font-bold leading-tight"
+              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
             >
               Gyroball Pro
               <span className="block text-yellow-300">Fortalecedor Muscular</span>
@@ -104,22 +104,22 @@ export default function Hero({ onBuyClick }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              className="grid grid-cols-3 gap-4"
+              className="grid grid-cols-3 gap-2 md:gap-4"
             >
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-2">
                   <span className="text-2xl">💪</span>
                 </div>
                 <span className="text-sm">Força</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-2">
                   <span className="text-2xl">🎯</span>
                 </div>
                 <span className="text-sm">Coordenação</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-12 h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur rounded-full flex items-center justify-center mb-2">
                   <span className="text-2xl">⚡</span>
                 </div>
                 <span className="text-sm">Reabilitação</span>
@@ -131,11 +131,11 @@ export default function Hero({ onBuyClick }: HeroProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 space-y-4"
+              className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 md:p-6 space-y-4"
             >
               <div className="flex items-baseline gap-3">
                 <span className="text-2xl text-white/60 line-through">R$ 89,90</span>
-                <span className="text-5xl font-bold text-yellow-300">R$ 59,90</span>
+                <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-300">R$ 59,90</span>
                 <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">-33%</span>
               </div>
               <p className="text-sm text-white/80">ou 2 unidades por apenas R$ 99,90</p>
@@ -216,7 +216,7 @@ export default function Hero({ onBuyClick }: HeroProps) {
                 {/* Controle de Áudio */}
                 <button
                   onClick={() => setIsMuted(!isMuted)}
-                  className="absolute top-4 right-4 w-12 h-12 bg-black/50 backdrop-blur-lg rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all z-10 opacity-0 group-hover:opacity-100"
+                  className="absolute top-4 right-4 w-10 h-10 md:w-12 md:h-12 bg-black/50 backdrop-blur-lg rounded-full flex items-center justify-center text-white hover:bg-black/70 transition-all z-10 opacity-0 group-hover:opacity-100"
                   aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
                 >
                   {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}

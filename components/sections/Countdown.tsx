@@ -56,9 +56,9 @@ export default function Countdown({ endDate }: CountdownProps) {
         key={value}
         initial={{ scale: 1.2, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white rounded-lg p-4 shadow-lg min-w-[80px]"
+        className="bg-white rounded-lg p-4 shadow-lg min-w-[60px] md:min-w-[80px]"
       >
-        <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
           {String(value).padStart(2, '0')}
         </div>
       </motion.div>
@@ -74,10 +74,10 @@ export default function Countdown({ endDate }: CountdownProps) {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-4"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-white">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">
             ⚡ OFERTA RELÂMPAGO - Termina em:
           </h3>
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-2 md:gap-4">
             <TimeUnit value={timeLeft.hours} label="Horas" />
             <div className="text-4xl font-bold text-white">:</div>
             <TimeUnit value={timeLeft.minutes} label="Minutos" />

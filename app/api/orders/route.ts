@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { preference } from '@/lib/mercadopago'
+import { sendNewOrderEmailToAdmins } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -190,6 +191,46 @@ export async function POST(request: NextRequest) {
       }
 
       console.log('✅ Pedido finalizado com sucesso!')
+
+      // Enviar email de novo pedido para admins
+      try {
+        const unitPrice = quantity === 1 ? 59.90 : (quantity === 2 ? 99.90 / 2 : 49.95)
+        
+        await sendNewOrderEmailToAdmins({
+          orderId: newOrder.id,
+          orderNumber: newOrder.id.substring(0, 8).toUpperCase(),
+          customerName: name,
+          customerEmail: email,
+          customerCPF: cpf,
+          customerPhone: phone,
+          shippingAddress: {
+            street,
+            number,
+            complement: complement || undefined,
+            neighborhood,
+            city,
+            state,
+            cep
+          },
+          items: [
+            {
+              name: 'Gyroball Pro - Fortalecedor Muscular Giroscópico',
+              quantity,
+              unitPrice,
+              total: subtotal
+            }
+          ],
+          subtotal,
+          shippingCost,
+          total,
+          paymentMethod: paymentMethod as 'pix' | 'credit_card',
+          paymentStatus: 'pending'
+        })
+        console.log('📧 Emails de novo pedido enviados para admins')
+      } catch (emailError) {
+        console.error('⚠️ Erro ao enviar emails (continuando):', emailError)
+        // Não falhar a criação do pedido se o email falhar
+      }
 
     } catch (mpError: any) {
       console.error('❌ Erro ao criar preferência no Mercado Pago:', mpError)
