@@ -314,20 +314,27 @@ export default function CheckoutPage() {
               >
                 <Card>
                   <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4">Seu Pedido</h2>
-                  <div className="flex items-center gap-4">
-                    <GyroballShake
-                      src="/images/D_NQ_NP_2X_931154-MLB88657957287_072025-F.webp"
-                      alt="Gyroball Pro"
-                      width={80}
-                      height={80}
-                      className="rounded-lg w-16 h-16 md:w-20 md:h-20"
-                      autoStart={true}
-                      duration={3000}
-                    />
-                    <div className="flex-1">
-                      <h3 className="font-bold text-lg">Gyroball Pro - Fortalecedor Muscular</h3>
-                      <p className="text-gray-600">Tecnologia giroscópica avançada</p>
+                  
+                  {/* Layout responsivo: vertical em mobile, horizontal em tablet+ */}
+                  <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+                    {/* Imagem maior em mobile */}
+                    <div className="flex-shrink-0">
+                      <GyroballShake
+                        src="/images/D_NQ_NP_2X_931154-MLB88657957287_072025-F.webp"
+                        alt="Gyroball Pro"
+                        width={120}
+                        height={120}
+                        className="rounded-xl w-24 h-24 sm:w-20 sm:h-20 md:w-28 md:h-28 shadow-lg"
+                        autoStart={true}
+                        duration={3000}
+                      />
                     </div>
+                    
+                    <div className="flex-1 text-center sm:text-left">
+                      <h3 className="font-bold text-base sm:text-lg">Gyroball Pro - Fortalecedor Muscular</h3>
+                      <p className="text-sm sm:text-base text-gray-600 mt-1">Tecnologia giroscópica avançada</p>
+                    </div>
+                    
                     <div className="flex items-center gap-3">
                       <Button
                         type="button"
