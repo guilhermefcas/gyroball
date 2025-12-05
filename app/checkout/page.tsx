@@ -12,6 +12,7 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Card from '@/components/ui/Card'
 import GyroballShake from '@/components/ui/GyroballShake'
+import PaymentStatusModal from '@/components/PaymentStatusModal'
 import { formatCurrency, formatCPF, formatPhone, formatCEP, validateCPF } from '@/lib/utils'
 import type { ShippingOption } from '@/types'
 
@@ -43,6 +44,9 @@ export default function CheckoutPage() {
   const [selectedShipping, setSelectedShipping] = useState<ShippingOption | null>(null)
   const [loadingCep, setLoadingCep] = useState(false)
   const [loadingOrder, setLoadingOrder] = useState(false)
+  const [paymentStatus, setPaymentStatus] = useState<'processing' | 'success' | 'failure' | 'pending' | null>(null)
+  const [currentOrderId, setCurrentOrderId] = useState<string | null>(null)
+  const [currentOrderNumber, setCurrentOrderNumber] = useState<string | null>(null)
 
   const {
     register,
@@ -143,6 +147,7 @@ export default function CheckoutPage() {
     }
 
     setLoadingOrder(true)
+    setPaymentStatus('processing')
 
     try {
       // Enviar dados no formato flat que a API espera
@@ -180,19 +185,90 @@ export default function CheckoutPage() {
 
       if (response.ok) {
         console.log('✅ Pedido criado com sucesso:', result)
-        if (paymentMethod === 'pix') {
-          router.push(result.paymentUrl)
-        } else {
-          router.push(result.paymentUrl)
+        
+        setCurrentOrderId(result.orderId)
+        setCurrentOrderNumber(result.orderId.substring(0, 8).toUpperCase())
+
+        // Abrir Mercado Pago em nova janela/popup
+        const paymentWindow = window.open(
+          result.paymentUrl,
+          'MercadoPago',
+          'width=800,height=600,scrollbars=yes'
+        )
+
+        // Monitorar status do pagamento
+        const checkPaymentStatus = async () => {
+          try {
+            const statusResponse = await fetch(`/api/orders?orderId=${result.orderId}`)
+            const statusData = await statusResponse.json()
+            
+            if (statusData.success && statusData.orders.length > 0) {
+              const order = statusData.orders[0]
+              const paymentStatus = order.payment_status
+
+              if (paymentStatus === 'approved') {
+                setPaymentStatus('success')
+                if (paymentWindow && !paymentWindow.closed) {
+                  paymentWindow.close()
+                }
+                return true
+              } else if (paymentStatus === 'rejected' || paymentStatus === 'cancelled') {
+                setPaymentStatus('failure')
+                if (paymentWindow && !paymentWindow.closed) {
+                  paymentWindow.close()
+                }
+                return true
+              } else if (paymentStatus === 'pending') {
+                // Continuar checando
+                return false
+              }
+            }
+            return false
+          } catch (error) {
+            console.error('Erro ao verificar status:', error)
+            return false
+          }
         }
+
+        // Fazer polling a cada 3 segundos
+        const pollInterval = setInterval(async () => {
+          const finished = await checkPaymentStatus()
+          
+          // Se a janela foi fechada pelo usuário
+          if (paymentWindow && paymentWindow.closed) {
+            clearInterval(pollInterval)
+            // Fazer uma última checagem
+            const finalCheck = await checkPaymentStatus()
+            if (!finalCheck) {
+              setPaymentStatus('pending')
+            }
+            setLoadingOrder(false)
+          }
+
+          if (finished) {
+            clearInterval(pollInterval)
+            setLoadingOrder(false)
+          }
+        }, 3000)
+
+        // Timeout após 5 minutos
+        setTimeout(() => {
+          clearInterval(pollInterval)
+          if (paymentWindow && !paymentWindow.closed) {
+            paymentWindow.close()
+          }
+          setPaymentStatus('pending')
+          setLoadingOrder(false)
+        }, 300000) // 5 minutos
+
       } else {
         console.error('❌ Erro na resposta:', result)
-        alert('Erro ao processar pedido. Tente novamente.')
+        setPaymentStatus('failure')
+        setLoadingOrder(false)
       }
     } catch (error) {
       console.error('❌ Erro ao criar pedido:', error)
-      alert('Erro ao processar pedido. Tente novamente.')
-    } finally {
+      setPaymentStatus('failure')
       setLoadingOrder(false)
     }
   }
@@ -636,6 +712,15 @@ export default function CheckoutPage() {
             </div>
           </div>
         </form>
+
+        {/* Payment Status Modal */}
+        <PaymentStatusModal
+          isOpen={paymentStatus !== null}
+          status={paymentStatus || 'processing'}
+          onClose={() => setPaymentStatus(null)}
+          orderId={currentOrderId || undefined}
+          orderNumber={currentOrderNumber || undefined}
+        />
       </div>
     </div>
   )
