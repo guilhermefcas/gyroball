@@ -145,34 +145,30 @@ export default function CheckoutPage() {
     setLoadingOrder(true)
 
     try {
+      // Enviar dados no formato flat que a API espera
       const orderData = {
-        customer: {
-          name: data.name,
-          email: data.email,
-          cpf: data.cpf,
-          phone: data.phone,
-          shipping: {
-            cep: data.cep,
-            street: data.street,
-            number: data.number,
-            complement: data.complement,
-            neighborhood: data.neighborhood,
-            city: data.city,
-            state: data.state,
-          },
-        },
-        items: [
-          {
-            productId: 'gyroball-pro',
-            quantity,
-            price: subtotal,
-          },
-        ],
+        // Dados do cliente
+        name: data.name,
+        email: data.email,
+        cpf: data.cpf,
+        phone: data.phone,
+        // Endereço de entrega
+        cep: data.cep,
+        street: data.street,
+        number: data.number,
+        complement: data.complement || '',
+        neighborhood: data.neighborhood,
+        city: data.city,
+        state: data.state,
+        // Dados do pedido
+        quantity,
         subtotal,
-        shipping: selectedShipping,
+        shippingCost: selectedShipping.price,
         total,
         paymentMethod,
       }
+
+      console.log('📦 Enviando pedido:', orderData)
 
       const response = await fetch('/api/orders', {
         method: 'POST',
@@ -183,16 +179,18 @@ export default function CheckoutPage() {
       const result = await response.json()
 
       if (response.ok) {
+        console.log('✅ Pedido criado com sucesso:', result)
         if (paymentMethod === 'pix') {
           router.push(result.paymentUrl)
         } else {
           router.push(result.paymentUrl)
         }
       } else {
+        console.error('❌ Erro na resposta:', result)
         alert('Erro ao processar pedido. Tente novamente.')
       }
     } catch (error) {
-      console.error('Error creating order:', error)
+      console.error('❌ Erro ao criar pedido:', error)
       alert('Erro ao processar pedido. Tente novamente.')
     } finally {
       setLoadingOrder(false)
