@@ -247,6 +247,7 @@ export async function POST(request: NextRequest) {
       success: true,
       orderId: newOrder.id,
       payment: paymentResponse,
+      paymentUrl: paymentResponse?.init_point || paymentResponse?.sandbox_init_point,
       message: 'Pedido criado com sucesso!',
     })
 
