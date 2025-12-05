@@ -291,7 +291,7 @@ export default function CheckoutPage() {
               <ArrowLeft className="w-5 h-5" />
               <span className="font-semibold">Voltar</span>
             </button>
-            <h1 className="text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
               Gyroball Pro
             </h1>
             <div className="flex items-center gap-2 text-green-600">
@@ -304,7 +304,7 @@ export default function CheckoutPage() {
 
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Left Column - Forms */}
             <div className="lg:col-span-2 space-y-6">
               {/* Product Summary */}
@@ -313,7 +313,7 @@ export default function CheckoutPage() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <Card>
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">Seu Pedido</h2>
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mb-4">Seu Pedido</h2>
                   <div className="flex items-center gap-4">
                     <GyroballShake
                       src="/images/D_NQ_NP_2X_931154-MLB88657957287_072025-F.webp"
@@ -366,9 +366,9 @@ export default function CheckoutPage() {
                 transition={{ delay: 0.1 }}
               >
                 <Card>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Dados Pessoais</h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="md:col-span-2">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Dados Pessoais</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="sm:col-span-2">
                       <Input
                         label="Nome Completo"
                         {...register('name')}
@@ -416,7 +416,7 @@ export default function CheckoutPage() {
                 transition={{ delay: 0.2 }}
               >
                 <Card>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Endereço de Entrega</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Endereço de Entrega</h2>
                   <div className="space-y-4">
                     <div className="relative">
                       <Input
@@ -436,8 +436,8 @@ export default function CheckoutPage() {
                       )}
                     </div>
 
-                    <div className="grid md:grid-cols-4 gap-4">
-                      <div className="md:col-span-3">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 sm:gap-4">
+                      <div className="col-span-2 sm:col-span-3">
                         <Input
                           label="Endereço"
                           {...register('street')}
@@ -445,20 +445,17 @@ export default function CheckoutPage() {
                           required
                         />
                       </div>
-                      <Input
-                        label="Número"
-                        {...register('number')}
-                        error={errors.number?.message}
-                        required
-                      />
+                      <div className="col-span-1">
+                        <Input
+                          label="Número"
+                          {...register('number')}
+                          error={errors.number?.message}
+                          required
+                        />
+                      </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <Input
-                        label="Complemento"
-                        {...register('complement')}
-                        placeholder="Opcional"
-                      />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                       <Input
                         label="Bairro"
                         {...register('neighborhood')}
@@ -528,9 +525,9 @@ export default function CheckoutPage() {
                 transition={{ delay: 0.3 }}
               >
                 <Card>
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4">Forma de Pagamento</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Forma de Pagamento</h2>
                   
-                  <div className="grid md:grid-cols-2 gap-4 mb-6">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
                     <button
                       type="button"
                       onClick={() => setPaymentMethod('pix')}
