@@ -69,16 +69,30 @@ export default function Hero({ onBuyClick }: HeroProps) {
             transition={{ duration: 0.8 }}
             className="text-white space-y-6"
           >
-            {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-lg px-4 py-2 rounded-full border border-white/30"
-            >
-              <TrendingUp className="w-4 h-4" />
-              <span className="text-xs md:text-sm font-semibold">+5.000 vendidos este mês</span>
-            </motion.div>
+            {/* Badges */}
+            <div className="flex flex-wrap gap-3">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-lg px-4 py-2 rounded-full border border-white/30"
+              >
+                <TrendingUp className="w-4 h-4" />
+                <span className="text-xs md:text-sm font-semibold">+5.000 vendidos este mês</span>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-green-400 to-emerald-500 backdrop-blur-lg px-4 py-2 rounded-full border-2 border-white shadow-lg animate-pulse"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                <span className="text-xs md:text-sm font-bold text-white">FRETE GRÁTIS BRASIL</span>
+              </motion.div>
+            </div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -133,11 +147,19 @@ export default function Hero({ onBuyClick }: HeroProps) {
               transition={{ delay: 0.6 }}
               className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 md:p-6 space-y-4"
             >
-              <div className="flex items-baseline gap-3">
-                <span className="text-2xl text-white/60 line-through">R$ 89,90</span>
-                <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-300">R$ 59,90</span>
-                <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">-33%</span>
-              </div>
+                <div className="space-y-2">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-2xl text-white/60 line-through">R$ 89,90</span>
+                    <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-300">R$ 59,90</span>
+                    <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold">-33%</span>
+                  </div>
+                  <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-4 py-2 rounded-full font-bold text-sm md:text-base shadow-lg">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>FRETE GRÁTIS para todo o Brasil!</span>
+                  </div>
+                </div>
               <p className="text-sm text-white/80">ou 2 unidades por apenas R$ 99,90</p>
               
               <div className="space-y-3">

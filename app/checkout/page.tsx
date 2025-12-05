@@ -76,7 +76,7 @@ export default function CheckoutPage() {
   }
   
   const subtotal = calculateSubtotal(quantity)
-  const shippingCost = selectedShipping?.price || 0
+  const shippingCost = 0 // FRETE GRÁTIS!
   const total = subtotal + shippingCost
 
   const handleQuantityChange = (delta: number) => {
@@ -141,11 +141,6 @@ export default function CheckoutPage() {
   }
 
   const onSubmit = async (data: CheckoutForm) => {
-    if (!selectedShipping) {
-      alert('Calcule o frete antes de continuar')
-      return
-    }
-
     setLoadingOrder(true)
     setPaymentStatus('processing')
 
@@ -168,7 +163,7 @@ export default function CheckoutPage() {
         // Dados do pedido
         quantity,
         subtotal,
-        shippingCost: selectedShipping.price,
+        shippingCost: 0, // FRETE GR\u00c1TIS
         total,
         paymentMethod,
       }
@@ -275,6 +270,16 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Banner Frete Grátis no Topo */}
+      <div className="bg-gradient-to-r from-green-500 via-emerald-500 to-green-600 text-white py-3 px-4 text-center font-bold animate-pulse">
+        <div className="flex items-center justify-center gap-2 text-sm md:text-base">
+          <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+          </svg>
+          <span>🎉 FRETE GRÁTIS PARA TODO O BRASIL! 🎉</span>
+        </div>
+      </div>
+      
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
@@ -660,28 +665,40 @@ export default function CheckoutPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <Card className="bg-gradient-to-br from-blue-50 to-purple-50">
-                    <h3 className="text-xl font-bold text-gray-900 mb-4">Resumo do Pedido</h3>
-                    <div className="space-y-3">
-                      <div className="flex justify-between text-gray-700">
-                        <span>Subtotal ({quantity}x Gyroball)</span>
-                        <span className="font-semibold">{formatCurrency(subtotal)}</span>
-                      </div>
-                      {selectedShipping && (
-                        <div className="flex justify-between text-gray-700">
-                          <span>Frete ({selectedShipping.name})</span>
-                          <span className="font-semibold">{formatCurrency(shippingCost)}</span>
+                    <Card className="bg-gradient-to-br from-blue-50 to-purple-50">
+                      {/* Banner Frete Grátis */}
+                      <div className="mb-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 rounded-lg text-center">
+                        <div className="flex items-center justify-center gap-2 mb-1">
+                          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="font-bold text-lg">FRETE GRÁTIS</span>
                         </div>
-                      )}
-                      <div className="border-t-2 border-gray-300 pt-3 flex justify-between items-center">
-                        <span className="text-lg font-bold text-gray-900">Total</span>
-                        <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                          {formatCurrency(total)}
-                        </span>
+                        <p className="text-sm opacity-90">Para todo o Brasil!</p>
                       </div>
-                    </div>
-
-                    <Button
+                      
+                      <h3 className="text-xl font-bold text-gray-900 mb-4">Resumo do Pedido</h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between text-gray-700">
+                          <span>Subtotal ({quantity}x Gyroball)</span>
+                          <span className="font-semibold">{formatCurrency(subtotal)}</span>
+                        </div>
+                        <div className="flex justify-between text-green-600 font-semibold">
+                          <span className="flex items-center gap-2">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                            </svg>
+                            Frete
+                          </span>
+                          <span className="font-bold">GRÁTIS</span>
+                        </div>
+                        <div className="border-t-2 border-gray-300 pt-3 flex justify-between items-center">
+                          <span className="text-lg font-bold text-gray-900">Total</span>
+                          <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                            {formatCurrency(total)}
+                          </span>
+                        </div>
+                      </div>                    <Button
                       type="submit"
                       size="lg"
                       className="w-full mt-6"
