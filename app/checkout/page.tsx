@@ -282,27 +282,27 @@ export default function CheckoutPage() {
       
       {/* Header */}
       <header className="bg-white shadow-sm border-b sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex items-center justify-between gap-2">
             <button
               onClick={() => router.push('/')}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center gap-1 sm:gap-2 text-gray-600 hover:text-gray-900 transition-colors"
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-semibold">Voltar</span>
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="font-semibold text-sm sm:text-base">Voltar</span>
             </button>
             <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
               Gyroball Pro
             </h1>
-            <div className="flex items-center gap-2 text-green-600">
-              <ShieldCheck className="w-5 h-5" />
-              <span className="text-sm font-semibold">Compra Segura</span>
+            <div className="flex items-center gap-1 sm:gap-2 text-green-600">
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-xs sm:text-sm font-semibold hidden sm:inline">Compra Segura</span>
             </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-6 md:py-8 max-w-7xl">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Left Column - Forms */}
@@ -690,23 +690,24 @@ export default function CheckoutPage() {
                           <span className="font-bold">GRÁTIS</span>
                         </div>
                         <div className="border-t-2 border-gray-300 pt-3 flex justify-between items-center">
-                          <span className="text-lg font-bold text-gray-900">Total</span>
-                          <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                          <span className="text-base sm:text-lg font-bold text-gray-900">Total</span>
+                          <span className="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
                             {formatCurrency(total)}
                           </span>
                         </div>
-                      </div>                    <Button
+                      </div>
+
+                      <Button
                       type="submit"
                       size="lg"
-                      className="w-full mt-6"
+                      className="w-full mt-6 text-base sm:text-lg py-4 sm:py-5"
                       isLoading={loadingOrder}
-                      disabled={!selectedShipping}
                     >
-                      <Lock className="w-5 h-5 mr-2" />
+                      <Lock className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                       {loadingOrder ? 'Processando...' : 'Finalizar Compra'}
                     </Button>
 
-                    <div className="mt-4 pt-4 border-t border-gray-300 space-y-2 text-sm text-gray-600">
+                    <div className="mt-4 pt-4 border-t border-gray-300 space-y-2 text-xs sm:text-sm text-gray-600">
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="w-4 h-4 text-green-600" />
                         <span>Compra 100% Segura e Criptografada</span>
